@@ -3,14 +3,30 @@ require_once 'config/database.php';
 
 $pesan_status = '';
 if (isset($_GET['status'])) {
-    if ($_GET['status'] == 'sukses_tambah') {
+    $status = $_GET['status']; // Ambil status sekali saja
+    if ($status == 'sukses_tambah') {
         $pesan_status = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                             Data barang berhasil ditambahkan!
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                          </div>";
-                             }
-    // Tambahkan kondisi lain untuk status edit/hapus nanti
-}                         
+    } elseif ($status == 'sukses_edit') {
+        $pesan_status = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            Data barang berhasil diperbarui!
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                         </div>";
+    } elseif ($status == 'sukses_hapus') {
+        $pesan_status = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            Data barang berhasil dihapus!
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                         </div>";
+    } elseif (in_array($status, ['gagal_hapus', 'id_tidak_ditemukan', 'id_tidak_valid'])) {
+        $pesan_status = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            Gagal menghapus data barang. Penyebab: " . htmlspecialchars($status) . "
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                         </div>";
+    }
+    // Tambahkan status lain jika dibutuhkan
+}
 
 $sql = "SELECT id, kode, nama_barang, deskripsi, harga_satuan, jumlah, foto FROM barang ORDER BY dibuat_pada DESC";
 
