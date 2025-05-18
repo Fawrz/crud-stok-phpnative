@@ -65,7 +65,7 @@ Proyek ini dibuat untuk memenuhi tugas mata kuliah Rekayasa Perangkat Lunak.
 Berikut adalah beberapa tangkapan layar dari aplikasi:
 
 **1. Halaman Utama (Daftar Barang):**
-![Halaman Utama](screenshots/halaman utama.png) 
+![Halaman Utama](screenshots/halaman_utama.png) 
 
 **2. Form Tambah Barang:**
 ![Form Tambah Barang](screenshots/form_tambah.png)
