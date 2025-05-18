@@ -15,36 +15,18 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplikasi Stok Barang - Daftar Barang</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            padding-top: 20px;
-        }
-    </style>
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    </head>
 <body>
-    <div class="container">
-        <h1>Daftar Barang</h1>
+    <div class="container mt-4">
+        <h1 class="mb-3">Daftar Barang</h1>
         <p>Berikut adalah daftar barang yang tersedia.</p>
-        <a href="tambah_barang.php">Tambah Barang Baru</a>
+        <a href="tambah_barang.php" class="btn btn-primary mb-3">Tambah Barang Baru</a>
         <br><br>
 
-        <table>
-            <thead>
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
                 <tr>
                     <th>No.</th>
                     <th>Kode</th>
@@ -74,23 +56,24 @@ if (!$result) {
                             echo "<td>Tidak ada foto</td>";
                         }
                         
-                        // Kolom aksi (Edit dan Hapus)
+                        // Kolom aksi (Edit dan Hapus) dengan class Bootstrap
                         echo "<td>";
-                        echo "<a href='edit_barang.php?id=" . $row['id'] . "'>Edit</a> | ";
-                        echo "<a href='hapus_barang.php?id=" . $row['id'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus barang ini?\");'>Hapus</a>";
+                        echo "<a href='edit_barang.php?id=" . $row['id'] . "' class='btn btn-warning btn-sm me-1'>Edit</a>";
+                        echo "<a href='hapus_barang.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Apakah Anda yakin ingin menghapus barang ini?\");'>Hapus</a>";
                         echo "</td>";
                         
                         echo "</tr>";
                     }
                 } else {
                     // Jika tidak ada data
-                    echo "<tr><td colspan='7' style='text-align:center;'>Belum ada data barang.</td></tr>";
+                    echo "<tr><td colspan='7' class='text-center'>Belum ada data barang.</td></tr>";
                 }
                 ?>
             </tbody>
         </table>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <?php
     if (isset($koneksi)) {
         mysqli_close($koneksi);
