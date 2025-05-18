@@ -12,5 +12,5 @@ if (!$koneksi) {
 }
 
 mysqli_set_charset($koneksi, "utf8mb4");
-echo "Koneksi database berhasil!";
+// echo "Koneksi database berhasil!";
 ?>
