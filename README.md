@@ -27,16 +27,16 @@ Proyek ini dibuat untuk memenuhi tugas mata kuliah Rekayasa Perangkat Lunak.
 ## Cara Instalasi dan Setup Lokal
 1.  **Clone Repository (atau Unduh ZIP):**
     ```bash
-    git clone [https://github.com/NAMA_USER_ANDA/NAMA_REPOSITORY_ANDA.git](https://github.com/NAMA_USER_ANDA/NAMA_REPOSITORY_ANDA.git)
+    git clone [https://github.com/Fawrz/crud-php-native.git](https://github.com/Fawrz/crud-php-native.git)
     ```
-    Atau unduh ZIP dan ekstrak ke direktori web server Anda (misalnya, `C:\xampp\htdocs\` jika menggunakan XAMPP). Ubah nama folder hasil ekstrak menjadi `crud-native` jika perlu.
+    Atau unduh ZIP dan ekstrak ke direktori web server (misalnya, `C:\xampp\htdocs\` jika menggunakan XAMPP). Ubah nama folder hasil ekstrak menjadi `crud-native` jika perlu.
 
 2.  **Buat Database:**
     * Buka phpMyAdmin (biasanya `http://localhost/phpmyadmin`).
-    * Buat database baru dengan nama: `crud_rpl` (sesuaikan jika Anda menggunakan nama lain).
+    * Buat database baru dengan nama: `crud_rpl` (sesuaikan dengan penamaan database).
 
 3.  **Impor Struktur Tabel:**
-    Jalankan query SQL berikut di database `crud_rpl` Anda (melalui tab SQL di phpMyAdmin) untuk membuat tabel `barang`:
+    Jalankan query SQL berikut di database `crud_rpl` (melalui tab SQL di phpMyAdmin) untuk membuat tabel `barang`:
     ```sql
     CREATE TABLE barang (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,19 +47,18 @@ Proyek ini dibuat untuk memenuhi tugas mata kuliah Rekayasa Perangkat Lunak.
         jumlah INT NOT NULL,
         foto VARCHAR(255) NULL,
         dibuat_pada TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        diperbarui_pada TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
     ```
-    *(Pastikan nama kolom `dibuat_pada` sesuai dengan yang Anda gunakan di database jika berbeda dengan `created_at`)*.
 
 4.  **Konfigurasi Database (jika perlu):**
-    File konfigurasi database ada di `config/database.php`. Secara default, sudah diatur untuk XAMPP standar (host: `localhost`, user: `root`, password: ``, dbname: `crud_rpl`). Sesuaikan jika konfigurasi XAMPP atau nama database Anda berbeda.
+    File konfigurasi database ada di `config/database.php`. Secara default, sudah diatur untuk XAMPP standar (host: `localhost`, user: `root`, password: ``, dbname: `crud_rpl`). Sesuaikan dengan konfigurasi XAMPP yang digunakan.
 
 5.  **Buat Folder `uploads/`:**
-    Di dalam direktori root proyek (`crud-native/`), pastikan ada folder bernama `uploads/`. Folder ini digunakan untuk menyimpan gambar produk yang diunggah dan harus memiliki izin tulis oleh server web.
+    Di dalam direktori root proyek (`crud-native/`), pastikan ada folder bernama `uploads/`. Folder ini digunakan untuk menyimpan gambar produk yang diunggah.
 
 6.  **Akses Aplikasi:**
-    Buka browser Anda dan navigasi ke `http://localhost/crud-native/` (atau path yang sesuai jika Anda meletakkannya di subfolder lain di `htdocs`).
+    Buka browser kemudian navigasi ke `http://localhost/crud-native/` (atau path yang sesuai jika meletakkannya di subfolder lain di `htdocs`).
 
 ## Tampilan Aplikasi (Screenshot)
 
@@ -67,19 +66,22 @@ Berikut adalah beberapa tangkapan layar dari aplikasi:
 
 **1. Halaman Utama (Daftar Barang):**
 ![Halaman Utama](screenshots/halaman_utama.png) 
-*(Ganti `halaman_utama.png` dengan nama file screenshot Anda)*
 
 **2. Form Tambah Barang:**
 ![Form Tambah Barang](screenshots/form_tambah.png)
-*(Ganti `form_tambah.png` dengan nama file screenshot Anda)*
 
 **3. Form Edit Barang:**
 ![Form Edit Barang](screenshots/form_edit.png)
-*(Ganti `form_edit.png` dengan nama file screenshot Anda)*
 
-**4. Pesan Status (Contoh):**
-![Pesan Status](screenshots/pesan_status.png)
-*(Ganti `pesan_status.png` dengan nama file screenshot Anda)*
+## Tampilan Database phpMyAdmin
+
+Berikut adalah beberapa tangkapan layar dari Database phpMyAdmin:
+
+**1. Struktur Tabel Barang:**
+![Struktur Tabel Barang](screenshots/struktur_tabel_barang.png) 
+
+**2. Database Tabel Barang:**
+![Database Tabel Barang](screenshots/database_tabel_barang.png)
 
 ---
 *Dibuat oleh: Muhammad Rifat Fawaz*
