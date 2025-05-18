@@ -1,19 +1,16 @@
 <?php
-// Inisialisasi variabel untuk error dan data sebelumnya
 $errors = [];
 $prev_data = [];
 
-// Ambil error dari URL jika ada
 if (isset($_GET['errors']) && is_array($_GET['errors'])) {
     foreach ($_GET['errors'] as $error) {
-        $errors[] = htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); // Sanitasi error sebelum ditampilkan
+        $errors[] = htmlspecialchars($error, ENT_QUOTES, 'UTF-8');
     }
 }
 
-// Ambil data input sebelumnya dari URL jika ada
 if (isset($_GET['prev_data']) && is_array($_GET['prev_data'])) {
     foreach ($_GET['prev_data'] as $key => $value) {
-        $prev_data[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8'); // Sanitasi data sebelum ditampilkan kembali di form
+        $prev_data[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
     }
 }
 ?>
@@ -24,24 +21,40 @@ if (isset($_GET['prev_data']) && is_array($_GET['prev_data'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Barang Baru - Aplikasi Stok Barang</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/custom_style.css">
 </head>
 <body>
-    <div class="container mt-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.php">Aplikasi Data Stok Toko Barang</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Daftar Barang Tersedia</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 main-content-container">
         <h1 class="mb-3">Tambah Barang Baru</h1>
 
         <?php if (!empty($errors)): ?>
             <div class="alert alert-danger">
                 <strong>Terjadi kesalahan:</strong>
                 <ul>
-                    <?php foreach ($errors as $error): ?>
-                        <li><?php echo $error; ?></li>
+                    <?php foreach ($errors as $error_msg): ?>
+                        <li><?php echo $error_msg; ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
 
         <form action="proses_tambah_barang.php" method="POST" enctype="multipart/form-data">
-
             <div class="mb-3">
                 <label for="kode" class="form-label">Kode Barang</label>
                 <input type="text" class="form-control" id="kode" name="kode" required value="<?php echo isset($prev_data['kode']) ? $prev_data['kode'] : ''; ?>">
@@ -71,14 +84,10 @@ if (isset($_GET['prev_data']) && is_array($_GET['prev_data'])) {
                 <label for="foto" class="form-label">Foto Barang</label>
                 <input type="file" class="form-control" id="foto" name="foto">
                 <div class="form-text">Ukuran foto maksimal 2MB. Format: JPG, JPEG, PNG.</div>
-                <?php if (isset($prev_data['foto_error'])): ?>
-                    <div class="text-danger mt-1"><small><?php echo $prev_data['foto_error']; ?></small></div>
-                <?php endif; ?>
             </div>
 
             <button type="submit" class="btn btn-primary">Simpan Barang</button>
             <a href="index.php" class="btn btn-secondary ms-2">Batal</a>
-
         </form>
     </div>
 

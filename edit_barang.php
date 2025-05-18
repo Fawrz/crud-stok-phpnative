@@ -7,39 +7,30 @@ $errors = [];
 
 if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
     $id_barang_diedit = trim($_GET['id']);
-
     $sql_select_by_id = "SELECT id, kode, nama_barang, deskripsi, harga_satuan, jumlah, foto FROM barang WHERE id = ?";
     $stmt_select = mysqli_prepare($koneksi, $sql_select_by_id);
-
     if ($stmt_select) {
         mysqli_stmt_bind_param($stmt_select, "i", $id_barang_diedit);
         mysqli_stmt_execute($stmt_select);
         $result_select = mysqli_stmt_get_result($stmt_select);
-
         if (mysqli_num_rows($result_select) == 1) {
             $barang = mysqli_fetch_assoc($result_select);
-        } else {
+        } else { 
             $errors[] = "Data barang dengan ID tersebut tidak ditemukan.";
         }
         mysqli_stmt_close($stmt_select);
-    } else {
-        $errors[] = "Gagal mempersiapkan statement untuk mengambil data barang: " . mysqli_error($koneksi);
+    } else { 
+        $errors[] = "Gagal mempersiapkan statement untuk mengambil data barang.";
     }
-} else {
+} else { 
     $errors[] = "ID barang tidak valid atau tidak disertakan.";
-    // Opsional: bisa redirect ke index.php
-    // header("Location: index.php?status=noid");
-    // exit();
 }
 
-// untuk menangani pesan error validasi dari proses_edit_barang.php (jika redirect kembali)
 if (isset($_GET['errors_update']) && is_array($_GET['errors_update'])) {
-    foreach ($_GET['errors_update'] as $error) {
+    foreach ($_GET['errors_update'] as $error) { 
         $errors[] = htmlspecialchars($error, ENT_QUOTES, 'UTF-8');
     }
 }
-// Jika ada data sebelumnya dari form yang gagal divalidasi saat update
-// $prev_data akan berisi data tersebut, $barang akan berisi data asli dari DB
 $prev_data_update = [];
 if (isset($_GET['prev_data_update']) && is_array($_GET['prev_data_update'])) {
      foreach ($_GET['prev_data_update'] as $key => $value) {
@@ -47,21 +38,16 @@ if (isset($_GET['prev_data_update']) && is_array($_GET['prev_data_update'])) {
     }
 }
 
-if (!$barang && empty($prev_data_update)) {
-    $barang = [
-        'id' => '', 'kode' => '', 'nama_barang' => '', 'deskripsi' => '',
-        'harga_satuan' => '', 'jumlah' => '', 'foto' => ''
-    ];
+if (!$barang && empty($prev_data_update) && empty($errors)) {
+    $errors[] = "Data barang tidak dapat dimuat.";
 }
 
-// Menentukan nilai yang akan ditampilkan di form: data dari submit sebelumnya (jika ada error), atau data dari DB
-$form_kode = isset($prev_data_update['kode']) ? $prev_data_update['kode'] : (isset($barang['kode']) ? htmlspecialchars($barang['kode']) : '');
-$form_nama_barang = isset($prev_data_update['nama_barang']) ? $prev_data_update['nama_barang'] : (isset($barang['nama_barang']) ? htmlspecialchars($barang['nama_barang']) : '');
-$form_deskripsi = isset($prev_data_update['deskripsi']) ? $prev_data_update['deskripsi'] : (isset($barang['deskripsi']) ? htmlspecialchars($barang['deskripsi']) : '');
-$form_harga_satuan = isset($prev_data_update['harga_satuan']) ? $prev_data_update['harga_satuan'] : (isset($barang['harga_satuan']) ? htmlspecialchars($barang['harga_satuan']) : '');
-$form_jumlah = isset($prev_data_update['jumlah']) ? $prev_data_update['jumlah'] : (isset($barang['jumlah']) ? htmlspecialchars($barang['jumlah']) : '');
-$current_foto = isset($barang['foto']) ? htmlspecialchars($barang['foto']) : '';
-
+$form_kode = isset($prev_data_update['kode']) ? $prev_data_update['kode'] : (isset($barang['kode']) ? htmlspecialchars($barang['kode'], ENT_QUOTES, 'UTF-8') : '');
+$form_nama_barang = isset($prev_data_update['nama_barang']) ? $prev_data_update['nama_barang'] : (isset($barang['nama_barang']) ? htmlspecialchars($barang['nama_barang'], ENT_QUOTES, 'UTF-8') : '');
+$form_deskripsi = isset($prev_data_update['deskripsi']) ? $prev_data_update['deskripsi'] : (isset($barang['deskripsi']) ? htmlspecialchars($barang['deskripsi'], ENT_QUOTES, 'UTF-8') : '');
+$form_harga_satuan = isset($prev_data_update['harga_satuan']) ? $prev_data_update['harga_satuan'] : (isset($barang['harga_satuan']) ? htmlspecialchars($barang['harga_satuan'], ENT_QUOTES, 'UTF-8') : '');
+$form_jumlah = isset($prev_data_update['jumlah']) ? $prev_data_update['jumlah'] : (isset($barang['jumlah']) ? htmlspecialchars($barang['jumlah'], ENT_QUOTES, 'UTF-8') : '');
+$current_foto = isset($barang['foto']) ? htmlspecialchars($barang['foto'], ENT_QUOTES, 'UTF-8') : '';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -70,9 +56,26 @@ $current_foto = isset($barang['foto']) ? htmlspecialchars($barang['foto']) : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Barang - <?php echo $form_nama_barang ?: 'Data Barang'; ?> - Aplikasi Stok Barang</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/custom_style.css">
 </head>
 <body>
-    <div class="container mt-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.php">Aplikasi Data Stok Toko Barang</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Daftar Barang Tersedia</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 main-content-container">
         <h1 class="mb-3">Edit Data Barang</h1>
 
         <?php if (!empty($errors)): ?>
@@ -86,10 +89,10 @@ $current_foto = isset($barang['foto']) ? htmlspecialchars($barang['foto']) : '';
             </div>
         <?php endif; ?>
 
-        <?php if ($id_barang_diedit && $barang && empty($errors)): ?>
+        <?php if ($id_barang_diedit && $barang && (empty($errors) || !empty($prev_data_update) ) ): ?>
         <form action="proses_edit_barang.php" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="id_barang" value="<?php echo htmlspecialchars($barang['id']); ?>">
-
+            <input type="hidden" name="id_barang" value="<?php echo isset($barang['id']) ? htmlspecialchars($barang['id'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+            
             <div class="mb-3">
                 <label for="kode" class="form-label">Kode Barang</label>
                 <input type="text" class="form-control" id="kode" name="kode" required value="<?php echo $form_kode; ?>">
@@ -137,11 +140,11 @@ $current_foto = isset($barang['foto']) ? htmlspecialchars($barang['foto']) : '';
              <div class="alert alert-warning">Data barang tidak dapat dimuat atau ID tidak valid. Silakan kembali ke daftar barang.</div>
              <a href="index.php" class="btn btn-primary">Kembali ke Daftar Barang</a>
         <?php endif; ?>
-
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <?php
-    if (isset($koneksi)) {
+    if (isset($koneksi) && $koneksi) {
         mysqli_close($koneksi);
     }
     ?>
