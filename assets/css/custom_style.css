@@ -1,0 +1,77 @@
+/* File: crud-native/assets/css/custom_style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa; /* Latar belakang abu-abu yang sangat terang, standar Bootstrap */
+    color: #212529;          /* Warna teks default Bootstrap untuk kontras yang baik */
+    line-height: 1.6;        /* Jarak antar baris untuk keterbacaan */
+}
+
+.navbar {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Shadow yang lebih halus untuk navbar */
+    /* Jika Anda menggunakan navbar dengan warna terang (misal bg-light), pastikan teksnya kontras */
+}
+
+.navbar-brand {
+    font-weight: 600; /* Brand sedikit lebih tebal */
+}
+
+.main-content-container {
+    background-color: #ffffff;
+    padding: 2rem 2.5rem; /* Padding sedikit lebih besar di dalam container utama */
+    border-radius: 0.5rem; /* Sudut sedikit lebih melengkung */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* Shadow yang lebih jelas namun tetap halus */
+    margin-top: 2rem;      /* Jarak dari navbar atau atas halaman */
+    margin-bottom: 3rem;   /* Jarak ke bagian bawah halaman */
+}
+
+h1, .h1 { /* Styling untuk judul utama halaman */
+    font-weight: 600;
+    color: #343a40; /* Warna heading yang solid */
+    margin-bottom: 0.75rem; /* Sesuaikan margin bawah judul utama */
+}
+
+/* Penyesuaian untuk baris yang berisi judul dan tombol Tambah */
+.page-header-controls {
+    margin-bottom: 1.5rem; /* Memberi jarak setelah baris ini */
+}
+
+.table {
+    margin-top: 1.5rem;
+    /* border: 1px solid #dee2e6; */ /* Opsional: border keliling tabel jika diinginkan */
+    font-size: 0.9rem; /* Sedikit memperkecil font tabel agar tidak terlalu padat */
+}
+
+.table th,
+.table td {
+    vertical-align: middle; /* Konten sel tabel rata tengah secara vertikal */
+    padding: 0.75rem; /* Sesuaikan padding sel tabel */
+}
+
+.table thead th {
+    /* Kelas .table-dark dari Bootstrap sudah cukup baik,
+       tapi Anda bisa override warnanya di sini jika mau. */
+    /* background-color: #212529; */
+    /* color: #ffffff; */
+    border-bottom-width: 2px; /* Garis bawah header tabel lebih tebal */
+}
+
+.btn {
+    font-weight: 500; /* Sedikit penebalan pada teks tombol */
+    padding: 0.4rem 0.8rem; /* Sesuaikan padding tombol jika perlu */
+}
+
+/* Spasi antar tombol aksi di dalam tabel */
+.table td .btn {
+    margin-right: 0.3rem;
+}
+.table td .btn:last-child {
+    margin-right: 0;
+}
+
+.alert { /* Styling untuk pesan status */
+    border-radius: 0.375rem; /* Sudut melengkung yang konsisten */
+    font-size: 0.9rem;
+}
