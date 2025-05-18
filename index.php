@@ -1,6 +1,17 @@
 <?php
 require_once 'config/database.php';
 
+$pesan_status = '';
+if (isset($_GET['status'])) {
+    if ($_GET['status'] == 'sukses_tambah') {
+        $pesan_status = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            Data barang berhasil ditambahkan!
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                         </div>";
+                             }
+    // Tambahkan kondisi lain untuk status edit/hapus nanti
+}                         
+
 $sql = "SELECT id, kode, nama_barang, deskripsi, harga_satuan, jumlah, foto FROM barang ORDER BY dibuat_pada DESC";
 
 $result = mysqli_query($koneksi, $sql);
@@ -20,6 +31,7 @@ if (!$result) {
     </head>
 <body>
     <div class="container mt-4">
+        <?php echo $pesan_status; ?>
         <h1 class="mb-3">Daftar Barang</h1>
         <p>Berikut adalah daftar barang yang tersedia.</p>
         <a href="tambah_barang.php" class="btn btn-primary mb-3">Tambah Barang Baru</a>
