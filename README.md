@@ -87,4 +87,3 @@ Berikut adalah beberapa tangkapan layar dari Database phpMyAdmin:
 *Dibuat oleh: Muhammad Rifat Fawaz*
 *NIM: 24091397039*
 *Mata Kuliah: Rekayasa Perangkat Lunak*
-```
