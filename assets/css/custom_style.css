@@ -4,66 +4,59 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa; /* Latar belakang abu-abu yang sangat terang, standar Bootstrap */
-    color: #212529;          /* Warna teks default Bootstrap untuk kontras yang baik */
-    line-height: 1.6;        /* Jarak antar baris untuk keterbacaan */
+    background-color: #f8f9fa;
+    color: #212529;
+    line-height: 1.6;
 }
 
 .navbar {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Shadow yang lebih halus untuk navbar */
-    /* Jika Anda menggunakan navbar dengan warna terang (misal bg-light), pastikan teksnya kontras */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 .navbar-brand {
-    font-weight: 600; /* Brand sedikit lebih tebal */
+    font-weight: 600;
 }
 
 .main-content-container {
     background-color: #ffffff;
-    padding: 2rem 2.5rem; /* Padding sedikit lebih besar di dalam container utama */
-    border-radius: 0.5rem; /* Sudut sedikit lebih melengkung */
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* Shadow yang lebih jelas namun tetap halus */
-    margin-top: 2rem;      /* Jarak dari navbar atau atas halaman */
-    margin-bottom: 3rem;   /* Jarak ke bagian bawah halaman */
+    padding: 2rem 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    margin-bottom: 3rem;
 }
 
-h1, .h1 { /* Styling untuk judul utama halaman */
+h1, .h1 { 
     font-weight: 600;
-    color: #343a40; /* Warna heading yang solid */
-    margin-bottom: 0.75rem; /* Sesuaikan margin bawah judul utama */
+    color: #343a40;
+    margin-bottom: 0.75rem;
 }
 
-/* Penyesuaian untuk baris yang berisi judul dan tombol Tambah */
 .page-header-controls {
-    margin-bottom: 1.5rem; /* Memberi jarak setelah baris ini */
+    margin-bottom: 1.5rem;
 }
 
 .table {
     margin-top: 1.5rem;
-    /* border: 1px solid #dee2e6; */ /* Opsional: border keliling tabel jika diinginkan */
-    font-size: 0.9rem; /* Sedikit memperkecil font tabel agar tidak terlalu padat */
+    /* border: 1px solid #dee2e6;
+    font-size: 0.9rem;
 }
 
 .table th,
 .table td {
-    vertical-align: middle; /* Konten sel tabel rata tengah secara vertikal */
-    padding: 0.75rem; /* Sesuaikan padding sel tabel */
+    vertical-align: middle;
+    padding: 0.75rem;
 }
 
 .table thead th {
-    /* Kelas .table-dark dari Bootstrap sudah cukup baik,
-       tapi Anda bisa override warnanya di sini jika mau. */
-    /* background-color: #212529; */
-    /* color: #ffffff; */
-    border-bottom-width: 2px; /* Garis bawah header tabel lebih tebal */
+    border-bottom-width: 2px;
 }
 
 .btn {
-    font-weight: 500; /* Sedikit penebalan pada teks tombol */
-    padding: 0.4rem 0.8rem; /* Sesuaikan padding tombol jika perlu */
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
 }
 
-/* Spasi antar tombol aksi di dalam tabel */
 .table td .btn {
     margin-right: 0.3rem;
 }
@@ -71,7 +64,7 @@ h1, .h1 { /* Styling untuk judul utama halaman */
     margin-right: 0;
 }
 
-.alert { /* Styling untuk pesan status */
-    border-radius: 0.375rem; /* Sudut melengkung yang konsisten */
+.alert {
+    border-radius: 0.375rem;
     font-size: 0.9rem;
 }
