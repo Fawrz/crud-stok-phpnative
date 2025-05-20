@@ -43,12 +43,10 @@ if (isset($_GET['id']) && !empty(trim($_GET['id'])) && is_numeric($_GET['id'])) 
             }
         } else {
             // Gagal eksekusi delete
-            // $pesan_redirect sudah default ke gagal_hapus
         }
         mysqli_stmt_close($stmt_delete);
     } else {
         // Gagal mempersiapkan statement delete
-        // $pesan_redirect sudah default ke gagal_hapus
     }
 } else {
     $pesan_redirect = "status=id_tidak_valid";
